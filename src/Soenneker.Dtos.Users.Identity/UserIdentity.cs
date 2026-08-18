@@ -4,26 +4,26 @@ using Newtonsoft.Json;
 namespace Soenneker.Dtos.Users.Identity;
 
 /// <summary>
-/// Represents a user's sign-in identity, including information about the identity provider and method of authentication.
+/// Identifies an external sign-in identity linked to a user, including its provider, provider-assigned identifier, and authentication method.
 /// </summary>
 public class UserIdentity
 {
     /// <summary>
-    /// Gets or sets the identity provider that issued the sign-in identity (e.g., "contoso.com" or "facebook.com").
+    /// Identity provider or tenant that issued the sign-in identity, such as <c>contoso.com</c> or <c>facebook.com</c>.
     /// </summary>
     [JsonPropertyName("issuer")]
     [JsonProperty("issuer")]
     public string Issuer { get; set; } = null!;
 
     /// <summary>
-    /// Gets or sets the unique identifier assigned to the user by the identity provider.
+    /// Stable unique user identifier assigned by the identity provider within the issuer's namespace.
     /// </summary>
     [JsonPropertyName("issuerAssignedId")]
     [JsonProperty("issuerAssignedId")]
     public string IssuerAssignedId { get; set; } = null!;
 
     /// <summary>
-    /// Gets or sets the method of sign-in used by the identity (e.g., "emailAddress", "userName", or "federated").
+    /// Sign-in method represented by the identity, such as <c>emailAddress</c>, <c>userName</c>, or <c>federated</c>.
     /// </summary>
     [JsonPropertyName("signInType")]
     [JsonProperty("signInType")]
