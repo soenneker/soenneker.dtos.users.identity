@@ -5,7 +5,7 @@
 
 # Soenneker.Dtos.Users.Identity
 
-Identifies an external sign-in identity linked to a user, including its provider, provider-assigned identifier, and authentication method.
+A DTO for an external or local sign-in identity: the issuer namespace, the issuer-assigned user identifier, and the sign-in method. It supports both `System.Text.Json` and Newtonsoft.Json.
 
 ## Install
 
@@ -13,14 +13,29 @@ Identifies an external sign-in identity linked to a user, including its provider
 dotnet add package Soenneker.Dtos.Users.Identity
 ```
 
-## What you get
+## Usage
 
-- `UserIdentity` — Identifies an external sign-in identity linked to a user, including its provider, provider-assigned identifier, and authentication method.
+```csharp
+using Soenneker.Dtos.Users.Identity;
 
-## API at a glance
+var identity = new UserIdentity
+{
+    Issuer = "contoso.onmicrosoft.com",
+    IssuerAssignedId = "alex@example.com",
+    SignInType = "emailAddress"
+};
+```
 
-| API | What it does | Result / important behavior |
-| --- | --- | --- |
-| `UserIdentity.Issuer` | Identity provider or tenant that issued the sign-in identity, such as `contoso.com` or `facebook.com`. | Identity provider or tenant that issued the sign-in identity, such as `contoso.com` or `facebook.com`. |
-| `UserIdentity.IssuerAssignedId` | Stable unique user identifier assigned by the identity provider within the issuer's namespace. | Stable unique user identifier assigned by the identity provider within the issuer's namespace. |
-| `UserIdentity.SignInType` | Sign-in method represented by the identity, such as `emailAddress`, `userName`, or `federated`. | Sign-in method represented by the identity, such as `emailAddress`, `userName`, or `federated`. |
+It serializes as:
+
+```json
+{
+  "issuer": "contoso.onmicrosoft.com",
+  "issuerAssignedId": "alex@example.com",
+  "signInType": "emailAddress"
+}
+```
+
+All three properties are required during initialization. Their exact accepted values and case-sensitivity are defined by the identity provider; the DTO does not normalize domains, validate sign-in types, or confirm that an identity exists.
+
+Treat the tuple of issuer, assigned identifier, and sign-in type as identity data—not proof of authentication. Establish the current user's identity from validated tokens or the platform's authenticated principal rather than trusting a client-supplied DTO.
