@@ -10,22 +10,24 @@ public class UserIdentity
 {
     /// <summary>
     /// Identity provider or tenant that issued the sign-in identity, such as <c>contoso.com</c> or <c>facebook.com</c>.
+    /// Null when absent from stored identity data.
     /// </summary>
     [JsonPropertyName("issuer")]
     [JsonProperty("issuer")]
-    public required string Issuer { get; set; }
+    public string? Issuer { get; set; }
 
     /// <summary>
-    /// Stable unique user identifier assigned by the identity provider within the issuer's namespace.
+    /// Stable unique user identifier assigned by the identity provider within the issuer's namespace, or null when absent from stored identity data.
     /// </summary>
     [JsonPropertyName("issuerAssignedId")]
     [JsonProperty("issuerAssignedId")]
-    public required string IssuerAssignedId { get; set; }
+    public string? IssuerAssignedId { get; set; }
 
     /// <summary>
     /// Sign-in method represented by the identity, such as <c>emailAddress</c>, <c>userName</c>, or <c>federated</c>.
+    /// Null when absent from stored identity data.
     /// </summary>
     [JsonPropertyName("signInType")]
     [JsonProperty("signInType")]
-    public required string SignInType { get; set; }
+    public string? SignInType { get; set; }
 }
