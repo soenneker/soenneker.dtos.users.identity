@@ -5,7 +5,7 @@
 
 # Soenneker.Dtos.Users.Identity
 
-A DTO for an external or local sign-in identity: the issuer namespace, the issuer-assigned user identifier, and the sign-in method. It supports both `System.Text.Json` and Newtonsoft.Json.
+A DTO for an external or local sign-in identity: the issuer namespace, the issuer-assigned user identifier, and the sign-in method. It supports `System.Text.Json`.
 
 ## Install
 

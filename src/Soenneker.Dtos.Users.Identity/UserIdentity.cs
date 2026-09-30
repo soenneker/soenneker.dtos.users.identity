@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using Newtonsoft.Json;
 
 namespace Soenneker.Dtos.Users.Identity;
 
@@ -13,14 +12,12 @@ public class UserIdentity
     /// Null when absent from stored identity data.
     /// </summary>
     [JsonPropertyName("issuer")]
-    [JsonProperty("issuer")]
     public string? Issuer { get; set; }
 
     /// <summary>
     /// Stable unique user identifier assigned by the identity provider within the issuer's namespace, or null when absent from stored identity data.
     /// </summary>
     [JsonPropertyName("issuerAssignedId")]
-    [JsonProperty("issuerAssignedId")]
     public string? IssuerAssignedId { get; set; }
 
     /// <summary>
@@ -28,6 +25,5 @@ public class UserIdentity
     /// Null when absent from stored identity data.
     /// </summary>
     [JsonPropertyName("signInType")]
-    [JsonProperty("signInType")]
     public string? SignInType { get; set; }
 }
