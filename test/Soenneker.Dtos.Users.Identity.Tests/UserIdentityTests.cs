@@ -1,6 +1,7 @@
 using Soenneker.Tests.Unit;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Soenneker.Dtos.Users.Identity.Tests;
 
@@ -11,7 +12,7 @@ public sealed class UserIdentityTests : UnitTest
     [Arguments("{\"issuer\":null,\"signInType\":null}", null, null)]
     [Arguments("{\"signInType\":\"federated\"}", null, "federated")]
     [Arguments("{\"issuer\":\"contoso.com\"}", "contoso.com", null)]
-    public async ValueTask Deserialize_accepts_optional_issuer_and_sign_in_type(string json, string? expectedIssuer, string? expectedSignInType)
+    public async ValueTask Deserialize_accepts_optional_issuer_and_sign_in_type(string json, string? expectedIssuer, string? expectedSignInType, CancellationToken cancellationToken)
     {
         UserIdentity identity = JsonSerializer.Deserialize<UserIdentity>(json)!;
         await Assert.That(identity.Issuer).IsEqualTo(expectedIssuer);
@@ -23,7 +24,7 @@ public sealed class UserIdentityTests : UnitTest
     [Arguments("{\"issuer\":\"contoso.com\",\"signInType\":\"federated\"}", null)]
     [Arguments("{\"issuer\":\"contoso.com\",\"signInType\":\"federated\",\"issuerAssignedId\":null}", null)]
     [Arguments("{\"issuer\":\"contoso.com\",\"signInType\":\"federated\",\"issuerAssignedId\":\"user-123\"}", "user-123")]
-    public async ValueTask Deserialize_accepts_optional_issuer_assigned_id(string json, string? expectedId)
+    public async ValueTask Deserialize_accepts_optional_issuer_assigned_id(string json, string? expectedId, CancellationToken cancellationToken)
     {
         UserIdentity identity = JsonSerializer.Deserialize<UserIdentity>(json)!;
         await Assert.That(identity.Issuer).IsEqualTo("contoso.com");
